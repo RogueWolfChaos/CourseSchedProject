@@ -1,5 +1,5 @@
 // src/components/RightSide.jsx
-import BookHome from './BookHome'
+import BookHome from './BookHome.jsx'
 
 function RightSide() {
     return (

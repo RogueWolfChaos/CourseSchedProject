@@ -4,10 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "dev": "course-scheduler/node_modules/.bin/vite",
+    "build": "course-scheduler/node_modules/.bin/vite build",
+    "lint": "course-scheduler/node_modules/.bin/eslint ..",
+    "preview": "course-scheduler/node_modules/.bin/vite preview"
   },
   "dependencies": {
     "bootstrap": "^5.3.8",

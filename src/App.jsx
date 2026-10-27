@@ -1,7 +1,7 @@
-import './App.css'
-import NavBar from './components/NavBar.jsx'
-import LeftSide from './components/LeftSide.jsx'
-import RightSide from './components/RightSide.jsx'
+import './assets/App.css'
+import NavBar from './Components/NavBar.jsx'
+import LeftSide from './Components/LeftSide.jsx'
+import RightSide from './Components/RightSide.jsx'
 
 function App() {
 

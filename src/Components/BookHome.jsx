@@ -1,6 +1,6 @@
 // src/components/BookHome.jsx
 import { useState } from 'react'
-import BookList from './BookList'
+import BookList from './BookList.jsx'
 
 function BookHome() {
     const myTitle = 'Books For Sale!'
