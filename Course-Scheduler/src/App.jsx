@@ -1,4 +1,7 @@
 import './assets/App.css'
+import CourseList from './components/CourseList'
+import CourseCard from './components/CourseCard'
+import ProgressSummary from './components/ProgressSummary'
 import NavBar from './Components/NavBar.jsx'
 import LeftSide from './Components/LeftSide.jsx'
 import RightSide from './Components/RightSide.jsx'
