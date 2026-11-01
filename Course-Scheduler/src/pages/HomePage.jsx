@@ -15,7 +15,11 @@ function HomePage() {
         }))
         : [];
 
-    const [completed, setCompleted] = useState([]);
+    const [completed, setCompleted] = useState(() => {
+        const savedCourses = localStorage.getItem('completedCourses');
+
+        return savedCourses ? JSON.parse(savedCourses).map(Number) : [];
+    });
     const [filter, setFilter] = useState('all');
 
     const isAvailable = (course) => {
@@ -65,6 +69,11 @@ function HomePage() {
         }
     };
 
+    const handleSave = () => {
+        localStorage.setItem('completedCourses', JSON.stringify(completed));
+        alert('Completed courses saved successfully!');
+    };
+
     const filteredCourses = courses.filter(course => {
         if (filter === 'completed') {
             return completed.includes(course.id);
@@ -109,6 +118,12 @@ function HomePage() {
                     <option value="remaining">Remaining</option>
                 </select>
             </div>
+            <button
+                className="btn btn-success mb-3"
+                onClick={handleSave}
+            >
+                Save Completed Courses
+            </button>
 
             <CourseList
                 courses={filteredCourses}
