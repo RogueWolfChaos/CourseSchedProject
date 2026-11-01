@@ -1,6 +1,6 @@
 import CourseCard from './CourseCard';
 
-function CourseList({ courses, completed, isAvailable, handleComplete }) {
+function CourseList({ courses, allCourses, completed, isAvailable, handleComplete }) {
 
     return (
         <div>
@@ -8,7 +8,7 @@ function CourseList({ courses, completed, isAvailable, handleComplete }) {
                 <CourseCard
                     key={course.id}
                     data={course}
-                    courses={courses}
+                    courses={allCourses}
                     completed={completed}
                     isAvailable={isAvailable}
                     handleComplete={handleComplete}

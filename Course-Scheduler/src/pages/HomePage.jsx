@@ -7,9 +7,16 @@ function HomePage() {
 
     const { data, isPending, error } = useFetch(url);
 
-    const courses = Array.isArray(data) ? data : [];
+    const courses = Array.isArray(data)
+        ? data.map(course => ({
+            ...course,
+            id: Number(course.id),
+            prerequisites: course.prerequisites.map(id => Number(id))
+        }))
+        : [];
 
     const [completed, setCompleted] = useState([]);
+    const [filter, setFilter] = useState('all');
 
     const isAvailable = (course) => {
         return course.prerequisites.every(prereqId =>
@@ -17,13 +24,37 @@ function HomePage() {
         );
     };
 
+
     const handleComplete = (course) => {
 
         if (completed.includes(course.id)) {
 
-            const remaining = completed.filter(
+            let remaining = completed.filter(
                 id => id !== course.id
             );
+
+            let changed = true;
+
+            while (changed) {
+                changed = false;
+
+                remaining = remaining.filter(id => {
+                    const currentCourse = courses.find(
+                        c => c.id === id
+                    );
+
+                    const prerequisitesMet =
+                        currentCourse.prerequisites.every(
+                            prereqId => remaining.includes(prereqId)
+                        );
+
+                    if (!prerequisitesMet) {
+                        changed = true;
+                    }
+
+                    return prerequisitesMet;
+                });
+            }
 
             setCompleted(remaining);
 
@@ -33,6 +64,19 @@ function HomePage() {
 
         }
     };
+
+    const filteredCourses = courses.filter(course => {
+        if (filter === 'completed') {
+            return completed.includes(course.id);
+        }
+
+        if (filter === 'remaining') {
+            return !completed.includes(course.id);
+        }
+
+        return true;
+    });
+
 
     return (
         <div className="container mt-4">
@@ -49,8 +93,26 @@ function HomePage() {
 
             <h4>Course Catalog</h4>
 
+            <div className="mb-3">
+                <label htmlFor="courseFilter" className="form-label">
+                    Filter Courses
+                </label>
+
+                <select
+                    id="courseFilter"
+                    className="form-select"
+                    value={filter}
+                    onChange={(e) => setFilter(e.target.value)}
+                >
+                    <option value="all">All Courses</option>
+                    <option value="completed">Completed Only</option>
+                    <option value="remaining">Remaining</option>
+                </select>
+            </div>
+
             <CourseList
-                courses={courses}
+                courses={filteredCourses}
+                allCourses={courses}
                 completed={completed}
                 isAvailable={isAvailable}
                 handleComplete={handleComplete}

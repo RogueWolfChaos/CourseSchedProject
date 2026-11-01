@@ -1,7 +1,7 @@
 function CourseCard({ data, courses, completed, isAvailable, handleComplete }) {
 
     const prerequisiteNumbers = data.prerequisites.map(id => {
-        const prerequisite = courses.find(course => course.id === id);
+        const prerequisite = courses.find(course => Number(course.id) === Number(id));
         return prerequisite ? prerequisite.number : 'Unknown';
     });
 
