@@ -17,7 +17,7 @@ function CourseCard({ data, courses, completed, isAvailable, handleComplete }) {
     }
 
     return (
-        <div className="card mb-3">
+        <div className="card h-100">
             <div className="card-body">
 
                 <h5 className="card-title">
