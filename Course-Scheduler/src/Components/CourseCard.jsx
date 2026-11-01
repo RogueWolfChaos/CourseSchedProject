@@ -1,29 +1,35 @@
-//still need to access db -- TODO access db
-//for each instance fof data, create a course card via map in which each
-// course id becomes its key and evey course id has its own course card with info
-//const handleDelete = (id) => {
-//     const newBooks = books.filter(book => book.id !== id)
-//     setBooks(newBooks)
-// }
-    function CourseCard({data, handleDelete}){
 
+function CourseCard({ data, courses }) {
 
-    return(
-    <>
-        <div className="card" style="width: 18rem;">
+    const prerequisiteNumbers = data.prerequisites.map(id => {
+        const prerequisite = courses.find(course => course.id === id);
+        return prerequisite ? prerequisite.number : 'Unknown';
+    });
+
+    return (
+        <div className="card mb-3">
             <div className="card-body">
-                <h5 className="card-title">{data.title}</h5>
-                <p className="card-text">Card content and course information </p>
-                <button
-                    className='btn btn-danger btn-sm'
-                    onClick={() => handleDelete(data.id)}>
-                    Delete {data.id}
-                </button>
+                <h5 className="card-title">
+                    {data.number} - {data.title}
+                </h5>
+
+                <p className="card-text">
+                    {data.description}
+                </p>
+
+                <p className="card-text">
+                    <strong>Credits:</strong> {data.credits}
+                </p>
+
+                <p className="card-text">
+                    <strong>Prerequisites:</strong>{' '}
+                    {prerequisiteNumbers.length > 0
+                        ? prerequisiteNumbers.join(', ')
+                        : 'None'}
+                </p>
             </div>
         </div>
-    </>
-
-)
+    );
 }
 
-export default CourseCard
+export default CourseCard;
