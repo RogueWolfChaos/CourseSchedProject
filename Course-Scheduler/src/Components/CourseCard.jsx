@@ -5,15 +5,34 @@
 //     const newBooks = books.filter(book => book.id !== id)
 //     setBooks(newBooks)
 // }
-    function CourseCard({data, handleDelete}){
+    function CourseCard({data, completed, isAvailible, handleToggle, handleDelete}){
+    let status=""
+        if(completed){
+            status="Completed"}
+        else if(isAvailible){
+            status="Availible"
+        }else{
+            status="Locked"
+        }
 
 
     return(
     <>
         <div className="card" style="width: 18rem;">
             <div className="card-body">
-                <h5 className="card-title">{data.title}</h5>
-                <p className="card-text">Card content and course information </p>
+                <h5 className="card-title">{data.number} - {data.title}</h5>
+                <p className="card-text">Credits: {data.credits} </p>
+                <p className="card-text">{data.description} </p>
+                <p className="card-text">Prerequisities: {data.prq.length===0 ? "None" : data.prq.join(", ")} </p>
+                <p className="card-text">Status: {status} </p>
+
+                <div className={"form-check"}>
+                    <input className={"form-check-input"} type={"checkbox"} checked={completed} disabled={!isAvailable && !completed} onChange={()=> handleToggle(data.id)}/>
+                    <label className={"form-check-label"}>
+                        Completed
+                    </label>
+                </div>
+
                 <button
                     className='btn btn-danger btn-sm'
                     onClick={() => handleDelete(data.id)}>

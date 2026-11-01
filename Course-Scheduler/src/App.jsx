@@ -1,25 +1,20 @@
-import './assets/App.css'
-import NavBar from './Components/NavBar.jsx'
-import LeftSide from './Components/LeftSide.jsx'
-import RightSide from './Components/RightSide.jsx'
+//Browser paths
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import NavBar from './components/NavBar'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
 
 function App() {
-
     return (
-        <>
-            <NavBar/>
-            <div className='container mt'>
-                <div className="row">
-                    <div className='col-md-3 text-center'>
-                        <LeftSide/>
-                    </div>
-                    <div className='col-md-9 text-center'>
-                        <RightSide/>
-                    </div>
-                </div>
-            </div>
-        </>
-            )
-            }
+        <BrowserRouter>
+            <NavBar />
 
-            export default App
+            <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/about" element={<AboutPage />} />
+            </Routes>
+        </BrowserRouter>
+    )
+}
+
+export default App
