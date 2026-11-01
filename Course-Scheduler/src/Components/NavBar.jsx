@@ -1,29 +1,25 @@
-// src/components/NavBar.jsx
+import { Link } from 'react-router-dom'
+
 function NavBar() {
     return (
-        <nav className='navbar navbar-expand-lg navbar-dark bg-dark'>
-            <div className='container-fluid'>
-                <a className='navbar-brand' href='#'>Aurora CS Course Scheduler</a>
+        <nav className="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
+            <div className="container">
+                <Link className="navbar-brand" to="/">
+                    Aurora CS Course Scheduler
+                </Link>
 
-                <button className='navbar-toggler' type='button'
-                        data-bs-toggle='collapse'
-                        data-bs-target='#navbarNav'>
-                    <span className='navbar-toggler-icon'></span>
-                </button>
+                <div className="navbar-nav">
+                    <Link className="nav-link" to="/">
+                        Home
+                    </Link>
 
-                <div className='collapse navbar-collapse' id='navbarNav'>
-                    <ul className='navbar-nav ms-auto'>
-                        <li className='nav-item'>
-                            <a className='nav-link active' href='#'>Home</a>
-                        </li>
-                        <li className='nav-item'>
-                            <a className='nav-link' href='#'>About</a>
-                        </li>
-                    </ul>
+                    <Link className="nav-link" to="/about">
+                        About
+                    </Link>
                 </div>
             </div>
         </nav>
-    );
+    )
 }
 
-export default NavBar;
+export default NavBar

@@ -1,48 +1,78 @@
-//still need to access db -- TODO access db
-//for each instance fof data, create a course card via map in which each
-// course id becomes its key and evey course id has its own course card with info
-//const handleDelete = (id) => {
-//     const newBooks = books.filter(book => book.id !== id)
-//     setBooks(newBooks)
-// }
-    function CourseCard({data, completed, isAvailible, handleToggle, handleDelete}){
-    let status=""
-        if(completed){
-            status="Completed"}
-        else if(isAvailible){
-            status="Availible"
-        }else{
-            status="Locked"
-        }
+function CourseCard({ data, courses, completed, isAvailable, handleComplete }) {
 
+    const prerequisiteNumbers = data.prerequisites.map(id => {
+        const prerequisite = courses.find(course => Number(course.id) === Number(id));
+        return prerequisite ? prerequisite.number : 'Unknown';
+    });
 
-    return(
-    <>
-        <div className="card" style="width: 18rem;">
+    const isCompleted = completed.includes(data.id);
+    const available = isAvailable(data);
+
+    let status = 'Locked';
+
+    if (isCompleted) {
+        status = 'Completed';
+    } else if (available) {
+        status = 'Available';
+    }
+
+    return (
+        <div className="card h-100">
             <div className="card-body">
-                <h5 className="card-title">{data.number} - {data.title}</h5>
-                <p className="card-text">Credits: {data.credits} </p>
-                <p className="card-text">{data.description} </p>
-                <p className="card-text">Prerequisities: {data.prq.length===0 ? "None" : data.prq.join(", ")} </p>
-                <p className="card-text">Status: {status} </p>
 
-                <div className={"form-check"}>
-                    <input className={"form-check-input"} type={"checkbox"} checked={completed} disabled={!isAvailable && !completed} onChange={()=> handleToggle(data.id)}/>
-                    <label className={"form-check-label"}>
+                <h5 className="card-title">
+                    {data.number} - {data.title}
+                </h5>
+
+                <p className="card-text">
+                    {data.description}
+                </p>
+
+                <p className="card-text">
+                    <strong>Credits:</strong> {data.credits}
+                </p>
+
+                <p className="card-text">
+                    <strong>Prerequisites:</strong>{' '}
+                    {prerequisiteNumbers.length > 0
+                        ? prerequisiteNumbers.join(', ')
+                        : 'None'}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>{' '}
+                    <span className={
+                              status === 'Completed'
+                                  ? 'badge bg-success'
+                                  : status === 'Available'
+                                      ? 'badge bg-primary'
+                                      : 'badge bg-secondary'
+                          }>
+                        {status}
+                    </span>
+                </p>
+
+                <div className="form-check">
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={`course-${data.id}`}
+                        checked={isCompleted}
+                        disabled={!isCompleted && !available}
+                        onChange={() => handleComplete(data)}
+                    />
+
+                    <label
+                        className="form-check-label"
+                        htmlFor={`course-${data.id}`}
+                    >
                         Completed
                     </label>
                 </div>
 
-                <button
-                    className='btn btn-danger btn-sm'
-                    onClick={() => handleDelete(data.id)}>
-                    Delete {data.id}
-                </button>
             </div>
         </div>
-    </>
-
-)
+    );
 }
 
-export default CourseCard
+export default CourseCard;
