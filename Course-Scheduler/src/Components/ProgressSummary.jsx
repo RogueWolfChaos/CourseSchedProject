@@ -1,4 +1,15 @@
-//11.	A progress summary is always visible showing:
-// number of courses completed, number available, and number locked.
-// These numbers update immediately when completion state changes.
-// They are derived from state — not stored separately.
+function ProgressSummary({ completedCount, availableCount, lockedCount }) {
+    return (
+        <div className="card mb-4">
+            <div className="card-body">
+                <h5 className="card-title">Course Progress</h5>
+
+                <p>Completed: {completedCount}</p>
+                <p>Available: {availableCount}</p>
+                <p>Locked: {lockedCount}</p>
+            </div>
+        </div>
+    );
+}
+
+export default ProgressSummary;
