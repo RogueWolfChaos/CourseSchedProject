@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import CourseList from '../components/CourseList';
+import ProgressSummary from '../components/ProgressSummary';
 
 function HomePage() {
     const url = `${import.meta.env.VITE_API_BASE_URL}/courses`;
@@ -86,11 +87,29 @@ function HomePage() {
         return true;
     });
 
+    const completedCount = courses.filter(course =>
+        completed.includes(course.id)
+    ).length;
+
+    const availableCount = courses.filter(course =>
+        !completed.includes(course.id) && isAvailable(course)
+    ).length;
+
+    const lockedCount = courses.filter(course =>
+        !completed.includes(course.id) && !isAvailable(course)
+    ).length;
+
 
     return (
         <div className="container mt-4">
 
             <h2>Aurora CS Course Scheduler</h2>
+
+            <ProgressSummary
+                completedCount={completedCount}
+                availableCount={availableCount}
+                lockedCount={lockedCount}
+            />
 
             {isPending && (
                 <p>Loading courses...</p>
