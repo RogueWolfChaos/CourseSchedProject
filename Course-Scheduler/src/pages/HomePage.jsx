@@ -1,4 +1,5 @@
 import useFetch from '../hooks/useFetch';
+import CourseList from '../components/CourseList';
 
 function HomePage() {
 
@@ -20,13 +21,7 @@ function HomePage() {
 
             <h4>Course Catalog</h4>
 
-            {courses.map(course => (
-                <div key={course.id}>
-                    <p>
-                        {course.number} - {course.title}
-                    </p>
-                </div>
-            ))}
+            <CourseList courses={courses} />
         </div>
     );
 }
