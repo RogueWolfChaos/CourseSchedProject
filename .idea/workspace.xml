@@ -5,35 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="802287c1-8785-44de-9d49-c043ef94106d" name="Changes" comment="test commit">
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/requests.http" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/routes/completions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/routes/courses.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/util/courseData.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/util/database.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Scheduler/server/util/valildateCourse.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/db/db.json" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/db/db.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/eslint.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/eslint.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/img.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/img_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/Components/CourseCard.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/Components/CourseCard.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/Components/CourseList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/Components/CourseList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/Components/NavBar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/Components/NavBar.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/Components/ProgressSummary.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/Components/ProgressSummary.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/assets/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/assets/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/assets/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/assets/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/hooks/useFetch.js" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/hooks/useFetch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/main.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/pages/AboutPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/pages/AboutPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/src/pages/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/src/pages/HomePage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Course-Scheduler/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/vite.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Course-Scheduler/server/util/valildateCourse.js" beforeDir="false" afterPath="$PROJECT_DIR$/Course-Scheduler/server/util/valildateCourse.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +65,12 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SIKOR\OneDrive\Desktop\CSC\CourseSchedProject\Course-Scheduler" />
+      <recent name="C:\Users\SIKOR\OneDrive\Desktop\CSC\CourseSchedProject\Course-Scheduler\server" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -119,7 +98,7 @@
       <workItem from="1793657725054" duration="2432000" />
       <workItem from="1793716000146" duration="494000" />
       <workItem from="1793716543419" duration="154000" />
-      <workItem from="1793716715890" duration="299000" />
+      <workItem from="1793716715890" duration="1090000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <option name="closed" value="true" />
