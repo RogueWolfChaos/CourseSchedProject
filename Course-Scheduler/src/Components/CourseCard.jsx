@@ -9,20 +9,35 @@ function CourseCard({ data, courses, completed, isAvailable, handleComplete }) {
     const available = isAvailable(data);
 
     let status = 'Locked';
+    let statusColor = 'secondary';
 
     if (isCompleted) {
         status = 'Completed';
+        statusColor = 'success';
     } else if (available) {
         status = 'Available';
+        statusColor = 'primary';
     }
 
     return (
-        <div className="card h-100">
-            <div className="card-body">
+        <div className="card h-100 overflow-hidden">
 
-                <h5 className="card-title">
-                    {data.number} - {data.title}
-                </h5>
+            <div
+                className={`bg-${statusColor}`}
+                style={{ height: '6px' }}
+            ></div>
+
+            <div className="card-body d-flex flex-column">
+
+                <div className="d-flex justify-content-between align-items-start mb-2">
+                    <h5 className="card-title me-2">
+                        {data.number} - {data.title}
+                    </h5>
+
+                    <span className={`badge bg-${statusColor}`}>
+                        {status}
+                    </span>
+                </div>
 
                 <p className="card-text">
                     {data.description}
@@ -39,20 +54,7 @@ function CourseCard({ data, courses, completed, isAvailable, handleComplete }) {
                         : 'None'}
                 </p>
 
-                <p>
-                    <strong>Status:</strong>{' '}
-                    <span className={
-                              status === 'Completed'
-                                  ? 'badge bg-success'
-                                  : status === 'Available'
-                                      ? 'badge bg-primary'
-                                      : 'badge bg-secondary'
-                          }>
-                        {status}
-                    </span>
-                </p>
-
-                <div className="form-check">
+                <div className="form-check mt-auto">
                     <input
                         className="form-check-input"
                         type="checkbox"
