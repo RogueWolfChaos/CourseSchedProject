@@ -1,4 +1,6 @@
 // util/validateBook.js
+//replace book validation w/ course validation (used by POST and PUT)
+// make sur eit checks required course fields
 function validateBook(body) {
     const { title, pages, author, year } = body
     if (!title || !author) {

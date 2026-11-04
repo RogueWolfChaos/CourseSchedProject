@@ -1,3 +1,16 @@
+##All 7 routes (5 courses + 2 completions)
+#
+#
+#
+#404 for a nonexistent course
+#
+#
+#
+#400 for invalid course POST
+#
+#
+#
+#400 for invalid completion PUT (violated prerequisite)
 ### GET request to example server
 GET https://examples.http-client.intellij.net/get
     ?generated-in=WebStorm
