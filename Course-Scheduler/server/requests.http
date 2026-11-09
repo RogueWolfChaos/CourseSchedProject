@@ -1,18 +1,61 @@
 ##All 7 routes (5 courses + 2 completions)
-#
-#
-#
 #404 for a nonexistent course
-#
-#
-#
 #400 for invalid course POST
-#
-#
-#
 #400 for invalid completion PUT (violated prerequisite)
 ### GET request to example server
 GET https://examples.http-client.intellij.net/get
     ?generated-in=WebStorm
 
 ###
+@baseUrl = http://localhost:3002/api
+
+###GET all books 200
+GET {{baseUrl}}/books
+
+###GET one book by id 200
+GET {{baseUrl}}/books/1
+
+###GET book does not exist 404
+GET {{baseUrl}}/books/9999
+
+###Search by title 200
+GET {{baseUrl}}/books/search/the
+
+###POST -create new book 201 (use this Id for lower steps too(Delete, etc.))
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "The Alchemist",
+  "pages": 197,
+  "author": "Coelho",
+  "year": 1988,
+  "num_sold": 150
+}
+
+###PUT update created boook above
+###PUT {{baseUrl}}/books/BookID_tbd
+Content-Type: application/json
+
+{
+  "title": "The Alchemist",
+  "pages": 197,
+  "author": "Coelho",
+  "year": 1988,
+  "num_sold": 200
+}
+
+###DELETE remove created book
+###DELETE {{baseUrl}}/books/IDOfCreated Book
+
+###Confirm deletion 404
+###GET {{baseUrl}}/books/IDOF CREATed book
+
+### POST missing required field -- expect 400
+POST {{baseUrl}}/books
+Content-Type: application/json
+
+{
+  "title": "Incomplete Book"
+}
+
