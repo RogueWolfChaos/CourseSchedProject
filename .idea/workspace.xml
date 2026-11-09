@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="802287c1-8785-44de-9d49-c043ef94106d" name="Changes" comment="Merge remote-tracking branch 'origin/master' into sidekick&#10;&#10;# Conflicts:&#10;#&#9;.idea/workspace.xml&#10;#&#9;Course-Scheduler/server/requests.http&#10;#&#9;Course-Scheduler/server/routes/completions.js&#10;#&#9;Course-Scheduler/server/routes/courses.js&#10;#&#9;Course-Scheduler/server/server.js&#10;#&#9;Course-Scheduler/server/util/courseData.js&#10;#&#9;Course-Scheduler/server/util/database.js&#10;#&#9;Course-Scheduler/server/util/valildateCourse.js" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTTP Request" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="sidekick" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {}
+}</component>
+  <component name="GitHubPullRequestState"><![CDATA[{
+  "prStates": [
+    {
+      "id": {
+        "id": "PR_kwDOVYX8mM8AAAABN8u1zA",
+        "number": 30
+      },
+      "lastSeen": 1794258153156
+    }
+  ]
+}]]></component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/RogueWolfChaos/CourseSchedProject.git&quot;,
+    &quot;accountId&quot;: &quot;9f13210e-fe99-49d7-913b-8db6a6b211a1&quot;
+  }
+}</component>
+  <component name="HttpClientOnboardingState"><![CDATA[{
+  "isOnboardingCommentShown": true
+}]]></component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.7367773645643796" />
+      <entry key="MS500" value="5.3154431277943335" />
+      <entry key="S2" value="8.36274761697806" />
+      <entry key="S5" value="10.27070356217879" />
+      <entry key="S10" value="12.89342608845646" />
+      <entry key="S30" value="17.19163002584318" />
+      <entry key="S60" value="18.905612357965143" />
+      <entry key="M2" value="19.900145697265028" />
+      <entry key="M5" value="20.546701429966458" />
+      <entry key="M10" value="20.771061811123413" />
+      <entry key="M15" value="20.846861138723398" />
+      <entry key="M30" value="20.923172668608007" />
+      <entry key="H1" value="20.961521633166353" />
+      <entry key="H2" value="20.980744612967452" />
+      <entry key="H4" value="20.990368252032898" />
+      <entry key="D1" value="20.998394145252675" />
+      <entry key="W1" value="20.999770578377007" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.6886959205287135" />
+      <entry key="MS500" value="5.281910652868508" />
+      <entry key="S2" value="8.34760199217011" />
+      <entry key="S5" value="10.241882847548277" />
+      <entry key="S10" value="12.854239448231217" />
+      <entry key="S30" value="17.164657802463882" />
+      <entry key="S60" value="18.889380837803866" />
+      <entry key="M2" value="19.89123815854744" />
+      <entry key="M5" value="20.542933259151578" />
+      <entry key="M10" value="20.769142197936837" />
+      <entry key="M15" value="20.845573399852196" />
+      <entry key="M30" value="20.922524775104502" />
+      <entry key="H1" value="20.961196675554053" />
+      <entry key="H2" value="20.980581880838447" />
+      <entry key="H4" value="20.99028682256157" />
+      <entry key="D1" value="20.998380564861144" />
+      <entry key="W1" value="20.99976863810516" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="3LLAi4yjiRMSNHJ7B7oDGLvZws6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "HeroV2",
+    "ignore.virus.scanning.warn.message": "true",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "ts.external.directory.path": "C:\\Program Files\\JetBrains\\WebStorm 2025.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\SIKOR\OneDrive\Desktop\CSC\CourseSchedProject\Course-Scheduler" />
+      <recent name="C:\Users\SIKOR\OneDrive\Desktop\CSC\CourseSchedProject\Course-Scheduler\server" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-e03c56caf84a-JavaScript-WS-252.23892.411" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="802287c1-8785-44de-9d49-c043ef94106d" name="Changes" comment="" />
+      <created>1793223097210</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1793223097210</updated>
+      <workItem from="1793223098310" duration="1641000" />
+      <workItem from="1793283275017" duration="2296000" />
+      <workItem from="1793551028772" duration="2415000" />
+      <workItem from="1793653901784" duration="50000" />
+      <workItem from="1793653960750" duration="168000" />
+      <workItem from="1793654139305" duration="352000" />
+      <workItem from="1793654603997" duration="114000" />
+      <workItem from="1793654735043" duration="103000" />
+      <workItem from="1793655453315" duration="64000" />
+      <workItem from="1793656098417" duration="1151000" />
+      <workItem from="1793657725054" duration="2432000" />
+      <workItem from="1793716000146" duration="494000" />
+      <workItem from="1793716543419" duration="154000" />
+      <workItem from="1793716715890" duration="1090000" />
+    </task>
+    <task id="LOCAL-00001" summary="test commit">
+      <option name="closed" value="true" />
+      <created>1793223165046</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1793223165046</updated>
+    </task>
+    <task id="LOCAL-00002" summary="test commit">
+      <option name="closed" value="true" />
+      <created>1793223256246</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1793223256246</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/sidekick" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="test commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="test commit" />
+  </component>
+</project>
