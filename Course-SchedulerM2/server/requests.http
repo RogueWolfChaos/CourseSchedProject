@@ -3,6 +3,7 @@
 # 400 for invalid course POST
 # 400 for invalid completion PUT (violated prerequisite)
 @baseUrl = http://localhost:3000/api
+@id=7
 ### GET all courses
 GET {{baseUrl}}/courses
 ### GET one course
@@ -32,9 +33,10 @@ Content-Type: application/json
   "prerequisites": []
 }
 
-### PUT CSC3700 (id 7) requires CSC2200 and CSC3250 - 200  Fail//FIX
-PUT {{baseUrl}}/courses/7
+### PUT CSC3700 (id 7) requires CSC2200 and CSC3250 - 200
+PUT {{baseUrl}}/courses/{{id}}
 Content-Type: application/json
+
 {
   "number": "CSC3700",
   "title": "Advanced Web Application Development",
@@ -44,7 +46,7 @@ Content-Type: application/json
 }
 
 ### PUT - 400 (missing numb)
-PUT {{baseUrl}}/courses/7
+PUT {{baseUrl}}/courses/{{id}}
 Content-Type: application/json
 
 {
@@ -66,7 +68,7 @@ Content-Type: application/json
 }
 
 ### PUT CSC3700 back to og prereq.s
-PUT {{baseUrl}}/courses/7
+PUT {{baseUrl}}/courses/{{id}}
 Content-Type: application/json
 
 {
@@ -77,8 +79,8 @@ Content-Type: application/json
   "prerequisites": [3]
 }
 
-### del CSC4600 - 200    Fail/FIX
-DELETE {{baseUrl}}/courses/{{createCourse.response.body.$.id}}
+### del CSC4600 - 200
+DELETE {{baseUrl}}/courses/{{id}}
 ### del - 404 (course dne)
 DELETE {{baseUrl}}/courses/9999
 
