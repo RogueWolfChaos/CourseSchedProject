@@ -1,6 +1,5 @@
-//create and exporr teh mysql mysq12/promise connection pool
-//credentials read from server
-//Check doc for specifics
+// Create and export the mysql2/promise connection pool
+// Database credentials are loaded from server/.env
 
 require('dotenv').config()
 const mysql = require('mysql2/promise')
