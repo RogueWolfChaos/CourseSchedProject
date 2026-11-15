@@ -1,4 +1,6 @@
 -- server/sql/schema.sql
+CREATE DATABASE IF NOT EXISTS team05;
+USE team05;
 DROP TABLE IF EXISTS completions;
 DROP TABLE IF EXISTS prerequisites;
 DROP TABLE IF EXISTS courses;

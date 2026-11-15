@@ -1,27 +1,27 @@
-//check docs
-//port?
-// server.js
-// Load .env FIRST -- before anything reads process.env
 require('dotenv').config()
 
 const express = require('express')
 const cors = require('cors')
-const booksRouter = require('./routes/books')
-
+const coursesRouter = require('./routes/courses')
+const completionsRouter = require('./routes/completions')
 const app = express()
-
-app.use(cors())
+app.use(cors({ origin: process.env.CLIENT_ORIGIN }))
 app.use(express.json())
+app.use('/api', coursesRouter)
+app.use('/api', completionsRouter)
 
-// All books routes live under /api -- e.g. /api/books
-app.use('/api', booksRouter)
-
-// Any route not matched above -- JSON 404
+// 404
 app.use((req, res) => {
     res.status(404).json({ error: 'Route not found' })
 })
-
-const PORT = process.env.PORT || 3002
+// other uncaught errors
+app.use((err, req, res, next) => {
+    if (err.type === 'entity.parse.failed') {
+        return res.status(400).json({ error: 'Invalid JSON in request body' })
+    }
+    res.status(err.status || 500).json({ error: err.message })
+})
+const PORT = process.env.PORT || 3000
 app.listen(PORT, () => {
-    console.log(`Books API running on http://localhost:${PORT}`)
+    console.log(`Course Scheduler API running on http://localhost:${PORT}`)
 })

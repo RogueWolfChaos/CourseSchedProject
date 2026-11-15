@@ -1,4 +1,5 @@
 -- server/sql/seed.sql
+USE team05;
 INSERT INTO courses (id, number, title, credits, description) VALUES
                                                                   (1,  'CSC1700', 'Introduction to Programming', 4,
                                                                    'Java programming fundamentals. Variables, loops, methods, arrays, and basic OOP.'),

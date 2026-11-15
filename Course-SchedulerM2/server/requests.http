@@ -1,61 +1,119 @@
-##All 7 routes (5 courses + 2 completions)
-#404 for a nonexistent course
-#400 for invalid course POST
-#400 for invalid completion PUT (violated prerequisite)
-### GET request to example server
-GET https://examples.http-client.intellij.net/get
-    ?generated-in=WebStorm
-
-###
-@baseUrl = http://localhost:3002/api
-
-###GET all books 200
-GET {{baseUrl}}/books
-
-###GET one book by id 200
-GET {{baseUrl}}/books/1
-
-###GET book does not exist 404
-GET {{baseUrl}}/books/9999
-
-###Search by title 200
-GET {{baseUrl}}/books/search/the
-
-###POST -create new book 201 (use this Id for lower steps too(Delete, etc.))
-POST {{baseUrl}}/books
+## All 7 routes (5 courses + 2 completions)
+# 404 for a nonexistent course
+# 400 for invalid course POST
+# 400 for invalid completion PUT (violated prerequisite)
+@baseUrl = http://localhost:3000/api
+@id=7
+### GET all courses
+GET {{baseUrl}}/courses
+### GET one course
+GET {{baseUrl}}/courses/10
+### GET one course - 404 dne
+GET {{baseUrl}}/courses/9999
+### post  new course 201
+# @name createCourse
+POST {{baseUrl}}/courses
 Content-Type: application/json
 
 {
-  "title": "The Alchemist",
-  "pages": 197,
-  "author": "Coelho",
-  "year": 1988,
-  "num_sold": 150
+  "number": "CSC4600",
+  "title": "Cloud Computing",
+  "credits": 3,
+  "description": "Test course",
+  "prerequisites": [5, 9]
 }
-
-###PUT update created boook above
-###PUT {{baseUrl}}/books/BookID_tbd
+### POST - 400 title missing
+POST {{baseUrl}}/courses
 Content-Type: application/json
 
 {
-  "title": "The Alchemist",
-  "pages": 197,
-  "author": "Coelho",
-  "year": 1988,
-  "num_sold": 200
+  "number": "CSC4700",
+  "credits": 3,
+  "description": "Missing a title",
+  "prerequisites": []
 }
 
-###DELETE remove created book
-###DELETE {{baseUrl}}/books/IDOfCreated Book
-
-###Confirm deletion 404
-###GET {{baseUrl}}/books/IDOF CREATed book
-
-### POST missing required field -- expect 400
-POST {{baseUrl}}/books
+### PUT CSC3700 (id 7) requires CSC2200 and CSC3250 - 200
+PUT {{baseUrl}}/courses/{{id}}
 Content-Type: application/json
 
 {
-  "title": "Incomplete Book"
+  "number": "CSC3700",
+  "title": "Advanced Web Application Development",
+  "credits": 3,
+  "description": "React, Node/Express, MySQL, JWT authentication.",
+  "prerequisites": [3, 5]
 }
 
+### PUT - 400 (missing numb)
+PUT {{baseUrl}}/courses/{{id}}
+Content-Type: application/json
+
+{
+  "title": "Advanced Web Application Development",
+  "credits": 3,
+  "prerequisites": [3]
+}
+
+### PUT - 404 (course dne)
+PUT {{baseUrl}}/courses/9999
+Content-Type: application/json
+
+{
+  "number": "CSC9999",
+  "title": "Does Not Exist",
+  "credits": 3,
+  "description": "Nothing here",
+  "prerequisites": []
+}
+
+### PUT CSC3700 back to og prereq.s
+PUT {{baseUrl}}/courses/{{id}}
+Content-Type: application/json
+
+{
+  "number": "CSC3700",
+  "title": "Advanced Web Application Development",
+  "credits": 3,
+  "description": "React, Node/Express, MySQL, JWT authentication. Full-stack web development.",
+  "prerequisites": [3]
+}
+
+### del CSC4600 - 200
+DELETE {{baseUrl}}/courses/{{id}}
+### del - 404 (course dne)
+DELETE {{baseUrl}}/courses/9999
+
+### completions
+
+### get completed course ids
+GET {{baseUrl}}/completions
+### put valid list - 200
+PUT {{baseUrl}}/completions
+Content-Type: application/json
+
+[1, 3, 2]
+
+### put - 400 (CSC4990 is missing prereq.s, not saved)
+PUT {{baseUrl}}/completions
+Content-Type: application/json
+
+[1, 10]
+
+### Put - 400 (body not array of ids)
+PUT {{baseUrl}}/completions
+Content-Type: application/json
+
+{ "completed": [1, 3] }
+
+### put - empty list -200
+PUT {{baseUrl}}/completions
+Content-Type: application/json
+
+[]
+
+### put restore og data -200
+PUT {{baseUrl}}/completions
+Content-Type: application/json
+
+[1, 3]

@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch';
 import CourseList from '../components/CourseList';
 import ProgressSummary from '../components/ProgressSummary';
 
-function HomePage() {
-    const url = `${import.meta.env.VITE_API_BASE_URL}/courses`;
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-    const { data, isPending, error } = useFetch(url);
+function HomePage() {
+    const { data, isPending, error } = useFetch(`${BASE_URL}/api/courses`);
+    const { data: savedCompletions, isPending: completionsPending, error: completionsError } =
+        useFetch(`${BASE_URL}/api/completions`);
 
     const courses = Array.isArray(data)
         ? data.map(course => ({
@@ -16,12 +18,14 @@ function HomePage() {
         }))
         : [];
 
-    const [completed, setCompleted] = useState(() => {
-        const savedCourses = localStorage.getItem('completedCourses');
-
-        return savedCourses ? JSON.parse(savedCourses).map(Number) : [];
-    });
+    const [completed, setCompleted] = useState([]);
     const [filter, setFilter] = useState('all');
+    const [message, setMessage] = useState(null); // { type: 'success' | 'danger', text }
+    const [saving, setSaving] = useState(false);
+
+    useEffect(() => {
+        if (Array.isArray(savedCompletions)) setCompleted(savedCompletions.map(Number));
+    }, [savedCompletions]);
 
     const isAvailable = (course) => {
         return course.prerequisites.every(prereqId =>
@@ -29,8 +33,8 @@ function HomePage() {
         );
     };
 
-
     const handleComplete = (course) => {
+        setMessage(null);
 
         if (completed.includes(course.id)) {
 
@@ -47,6 +51,8 @@ function HomePage() {
                     const currentCourse = courses.find(
                         c => c.id === id
                     );
+
+                    if (!currentCourse) return false;
 
                     const prerequisitesMet =
                         currentCourse.prerequisites.every(
@@ -70,9 +76,30 @@ function HomePage() {
         }
     };
 
-    const handleSave = () => {
-        localStorage.setItem('completedCourses', JSON.stringify(completed));
-        alert('Completed courses saved successfully!');
+    const handleSave = async () => {
+        setSaving(true);
+        setMessage(null);
+
+        try {
+            const resp = await fetch(`${BASE_URL}/api/completions`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(completed)
+            });
+            const body = await resp.json().catch(() => null);
+
+            if (!resp.ok) {
+                // server error message
+                throw new Error(body?.error || `HTTP error: ${resp.status}`);
+            }
+
+            setCompleted(body);
+            setMessage({ type: 'success', text: 'Completed courses saved successfully!' });
+        } catch (err) {
+            setMessage({ type: 'danger', text: `Save failed: ${err.message}` });
+        } finally {
+            setSaving(false);
+        }
     };
 
     const filteredCourses = courses.filter(course => {
@@ -111,12 +138,12 @@ function HomePage() {
                 lockedCount={lockedCount}
             />
 
-            {isPending && (
+            {(isPending || completionsPending) && (
                 <p>Loading courses...</p>
             )}
 
-            {error && (
-                <p className="text-danger">{error}</p>
+            {(error || completionsError) && (
+                <p className="text-danger">{error || completionsError}</p>
             )}
 
             <h4>Course Catalog</h4>
@@ -137,12 +164,20 @@ function HomePage() {
                     <option value="remaining">Remaining</option>
                 </select>
             </div>
+
             <button
                 className="btn btn-success mb-3"
                 onClick={handleSave}
+                disabled={saving || isPending || completionsPending}
             >
-                Save Completed Courses
+                {saving ? 'Saving...' : 'Save Completed Courses'}
             </button>
+
+            {message && (
+                <div className={`alert alert-${message.type}`} role="alert">
+                    {message.text}
+                </div>
+            )}
 
             <CourseList
                 courses={filteredCourses}
