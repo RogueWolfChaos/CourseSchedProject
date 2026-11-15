@@ -79,8 +79,8 @@ Content-Type: application/json
   "prerequisites": [3]
 }
 
-### del CSC4600 - 200
-DELETE {{baseUrl}}/courses/{{id}}
+### DELETE newly created CSC4600 - 200
+DELETE {{baseUrl}}/courses/{{createCourse.response.body.$.id}}
 ### del - 404 (course dne)
 DELETE {{baseUrl}}/courses/9999
 
