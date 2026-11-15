@@ -1,54 +1,38 @@
-Installation and Setup
-
 1. Install Dependencies
 
-Open a terminal in the course-scheduler folder and run:
+In the Course-SchedulerM2 folder:
 
 npm install
+cd server
+npm install
 
-2. Configure the Environment
+2. Start the Application
 
-The project uses a .env file containing:
-
-VITE_API_BASE_URL=http://localhost:3333
-
-This configures the application to communicate with JSON Server.
-
-3. Start JSON Server
-
-Open a terminal in the project folder and run:
-
-npx json-server --watch db/db.json --port 3333
-
-JSON Server provides the course data at:
-
-http://localhost:3333/courses
-
-Keep this terminal running.
-
-4. Start the React Application
-
-Open a second terminal in the project folder and run:
+In the server folder:
 
 npm run dev
 
-Open the local URL displayed by Vite in your browser, typically:
+In a second terminal, from the main Course-SchedulerM2 folder:
 
-http://localhost:5173
+npm run dev
 
-Both JSON Server and the React application must be running for the course catalog to load.
+Open http://localhost:5173 in your browser.
 
 Using the Application
 
-On the Home page, students can view the available courses and their prerequisites.
+View courses, prerequisites, and completion status.
 
-Courses without prerequisites are initially available. Completing a course may unlock additional courses.
+Complete available courses to unlock additional courses.
 
-Students can select the Completed checkbox to mark a course as finished. If a prerequisite course is unchecked, dependent courses are automatically unchecked as well.
+Uncheck prerequisites to automatically uncheck dependent courses.
 
-The Save Completed Courses button stores completion selections in the browser's localStorage. Saved selections are restored when the application is reloaded.
+Save completed courses to MySQL.
 
-The Course Progress section displays the number of completed, available, and locked courses, along with the overall completion percentage.
+Filter courses and track completion progress.
+
+API Testing
+
+Use server/requests.http to test API endpoints and error handling.
 
 Contributors
 
