@@ -1,6 +1,5 @@
-// util/validateBook.js
-//replace book validation w/ course validation (used by POST and PUT)
-// make sur eit checks required course fields
+// Validates course data for POST and PUT requests
+// Returns an error message if invalid, otherwise null
 function validateCourse(body) {
     if (!body || typeof body !== 'object') {
         return 'Request body must be a JSON object'
