@@ -32,7 +32,7 @@ Content-Type: application/json
   "prerequisites": []
 }
 
-### PUT CSC3700 (id 7) requires CSC2200 and CSC3250 - 200
+### PUT CSC3700 (id 7) requires CSC2200 and CSC3250 - 200  Fail//FIX
 PUT {{baseUrl}}/courses/7
 Content-Type: application/json
 {
@@ -77,7 +77,7 @@ Content-Type: application/json
   "prerequisites": [3]
 }
 
-### del CSC4600 - 200
+### del CSC4600 - 200    Fail/FIX
 DELETE {{baseUrl}}/courses/{{createCourse.response.body.$.id}}
 ### del - 404 (course dne)
 DELETE {{baseUrl}}/courses/9999

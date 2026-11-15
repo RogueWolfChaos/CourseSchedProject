@@ -28,7 +28,7 @@ function AboutPage() {
                             </p>
 
                             <p>
-                                <strong>Version:</strong> 1.0.0
+                                <strong>Version:</strong> 2.0.0
                             </p>
 
                             <p>

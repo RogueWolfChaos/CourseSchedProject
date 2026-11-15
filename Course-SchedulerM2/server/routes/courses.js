@@ -1,110 +1,134 @@
-//- GET /courses — retrieve all courses with prerequisites
-// - GET /courses/:id — retrieve one course
-// - POST /courses — create a course and its prerequisites
-// - PUT /courses/:id — update a course and replace its prerequisites
-// - DELETE /courses/:id — delete a course
-// Also includes:
-// - SQL queries using ? placeholders
-// - validateCourse() for POST and PUT
-// - Appropriate status codes (200, 201, 400, 404, 500)
-// - try/catch for database errors
-
-// routes/books.js
-// All five CRUD routes plus search -- mysql2 with parameterized queries
 const express = require('express')
-const router = express.Router()
 const pool = require('../util/database')
-const validateBook = require('../util/validateBook')
+const { getCoursesWithPrereqs } = require('../util/courseData')
+const validateCourse = require('../util/validateCourse')
 
-// GET all books
-router.get('/books', async (req, res) => {
+const router = express.Router()
+const cleanPrereqs = body => [...new Set((body.prerequisites || []).map(Number))]
+async function findMissingIds(ids) {
+    if (ids.length === 0) return []
+    const [rows] = await pool.query('SELECT id FROM courses WHERE id IN (?)', [ids])
+    const found = rows.map(r => r.id)
+    return ids.filter(id => !found.includes(id))
+}
+async function insertPrereqs(courseId, ids) {
+    if (ids.length === 0) return
+    const rows = ids.map(prereqId => [courseId, prereqId])
+    await pool.query('INSERT INTO prerequisites (course_id, prereq_id) VALUES ?', [rows])
+}
+
+// Get all courses from api
+router.get('/courses', async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM books')
-        res.json(rows)
+        const courses = await getCoursesWithPrereqs(pool)
+        res.json(courses)
+    } catch (err) {
+        res.status(500).json({ error: err.message })
+    }
+})
+// Get specific course form api
+router.get('/courses/:id', async (req, res) => {
+    const id = Number(req.params.id)
+    if (!Number.isInteger(id)) {
+        return res.status(404).json({ error: 'Course not found' })
+    }
+    try {
+        const course = await getCoursesWithPrereqs(pool, id)
+        if (!course) return res.status(404).json({ error: 'Course not found' })
+        res.json(course)
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
 })
 
-// GET search by title -- must come BEFORE /books/:id
-router.get('/books/search/:term', async (req, res) => {
-    try {
-        const [rows] = await pool.query(
-            'SELECT * FROM books WHERE title LIKE ?',
-            [`%${req.params.term}%`]
-        )
-        res.json(rows)
-    } catch (err) {
-        res.status(500).json({ error: err.message })
-    }
-})
-
-// GET single book by id
-router.get('/books/:id', async (req, res) => {
-    try {
-        const [rows] = await pool.query(
-            'SELECT * FROM books WHERE id = ?',
-            [req.params.id]
-        )
-        if (rows.length === 0) return res.status(404).json({ error: 'Book not found' })
-        res.json(rows[0])
-    } catch (err) {
-        res.status(500).json({ error: err.message })
-    }
-})
-
-// POST -- create a new book
-router.post('/books', async (req, res) => {
-    const error = validateBook(req.body)
+// post course to api
+router.post('/courses', async (req, res) => {
+    const error = validateCourse(req.body)
     if (error) return res.status(400).json({ error })
 
-    const { title, pages, author, year, num_sold } = req.body
+    const { number, title, credits, description } = req.body
+    const prereqs = cleanPrereqs(req.body)
+
     try {
+        const missing = await findMissingIds(prereqs)
+        if (missing.length > 0) {
+            return res.status(400).json({
+                error: `Prerequisite course id(s) not found: ${missing.join(', ')}`
+            })
+        }
         const [result] = await pool.query(
-            'INSERT INTO books (title, pages, author, year, num_sold) VALUES (?, ?, ?, ?, ?)',
-            [title, parseInt(pages), author, parseInt(year), num_sold || 0]
+            'INSERT INTO courses (number, title, credits, description) VALUES (?, ?, ?, ?)',
+            [number, title, credits, description ?? null]
         )
-        const [rows] = await pool.query(
-            'SELECT * FROM books WHERE id = ?', [result.insertId]
-        )
-        res.status(201).json(rows[0])
+        await insertPrereqs(result.insertId, prereqs)
+
+        const created = await getCoursesWithPrereqs(pool, result.insertId)
+        res.status(201).json(created)
     } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ error: `Course number ${number} already exists` })
+        }
         res.status(500).json({ error: err.message })
     }
 })
 
-// PUT -- update an existing book
-router.put('/books/:id', async (req, res) => {
-    const error = validateBook(req.body)
+// Put specific course api
+router.put('/courses/:id', async (req, res) => {
+    const id = Number(req.params.id)
+    if (!Number.isInteger(id)) {
+        return res.status(404).json({ error: 'Course not found' })
+    }
+
+    const error = validateCourse(req.body)
     if (error) return res.status(400).json({ error })
 
-    const { title, pages, author, year, num_sold } = req.body
-    const id = parseInt(req.params.id)
+    const { number, title, credits, description } = req.body
+    const prereqs = cleanPrereqs(req.body)
+
+    if (prereqs.includes(id)) {
+        return res.status(400).json({ error: 'A course cannot be its own prerequisite' })
+    }
+
     try {
+        const missing = await findMissingIds(prereqs)
+        if (missing.length > 0) {
+            return res.status(400).json({
+                error: `Prerequisite course id(s) not found: ${missing.join(', ')}`
+            })
+        }
+
         const [result] = await pool.query(
-            'UPDATE books SET title=?, pages=?, author=?, year=?, num_sold=? WHERE id=?',
-            [title, parseInt(pages), author, parseInt(year), parseInt(num_sold), id]
+            'UPDATE courses SET number = ?, title = ?, credits = ?, description = ? WHERE id = ?',
+            [number, title, credits, description ?? null, id]
         )
-        if (result.affectedRows === 0) return res.status(404).json({ error: 'Book not found' })
-        const [rows] = await pool.query(
-            'SELECT * FROM books WHERE id = ?', [id]
-        )
-        res.json(rows[0])
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Course not found' })
+        }
+
+        await pool.query('DELETE FROM prerequisites WHERE course_id = ?', [id])
+        await insertPrereqs(id, prereqs)
+
+        const updated = await getCoursesWithPrereqs(pool, id)
+        res.json(updated)
     } catch (err) {
+        if (err.code === 'ER_DUP_ENTRY') {
+            return res.status(400).json({ error: `Course number ${number} already exists` })
+        }
         res.status(500).json({ error: err.message })
     }
 })
 
-// DELETE -- remove a book
-router.delete('/books/:id', async (req, res) => {
-    const id = parseInt(req.params.id)
+// Del specific course from api
+router.delete('/courses/:id', async (req, res) => {
+    const id = Number(req.params.id)
+    if (!Number.isInteger(id)) {
+        return res.status(404).json({ error: 'Course not found' })
+    }
     try {
-        const [rows] = await pool.query(
-            'SELECT * FROM books WHERE id = ?', [id]
-        )
-        if (rows.length === 0) return res.status(404).json({ error: 'Book not found' })
-        await pool.query('DELETE FROM books WHERE id = ?', [id])
-        res.json(rows[0])
+        const course = await getCoursesWithPrereqs(pool, id)
+        if (!course) return res.status(404).json({ error: 'Course not found' })
+        await pool.query('DELETE FROM courses WHERE id = ?', [id])
+        res.json(course)
     } catch (err) {
         res.status(500).json({ error: err.message })
     }
