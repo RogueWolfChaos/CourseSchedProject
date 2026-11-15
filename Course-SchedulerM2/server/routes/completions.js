@@ -1,7 +1,7 @@
 const express = require('express')
 const pool = require('../util/database')
 const { getCoursesWithPrereqs, replaceCompletions } = require('../util/courseData')
-const USER_ID = 1
+const USER_ID = 1 //M3: replaced by the logged-in user's id
 const router = express.Router()
 const isValidCompletionSet = (courses, completed) => {
     return completed.every(id => {
